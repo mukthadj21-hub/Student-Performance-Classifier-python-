@@ -1,0 +1,66 @@
+# CHAPTER 2: SYSTEM ANALYSIS AND LITERATURE REVIEW
+
+## 2.1 Literature Review
+The application of Machine Learning in education, often referred to as Educational Data Mining (EDM), has been a subject of intense research over the last decade. Several studies have laid the groundwork for the methodologies used in this project.
+
+1.  **Early Warning Systems (EWS):** Researchers like Arnold and Pistilli (2012) at Purdue University pioneered the "Course Signals" project, which used predictive modeling to identify students at risk of failing. Their study demonstrated that real-time feedback based on engagement data significantly improved student retention rates.
+2.  **Impact of Engagement Metrics:** Studies by Romero et al. (2013) highlighted that non-academic factors like attendance and time spent on learning management systems (LMS) are often better predictors of final performance than initial entrance exam scores. This justifies our use of "Study Hours" and "Attendance" as primary features.
+3.  **Algorithm Comparison:** A comparative study by Bharadwaj and Pal (2011) evaluated various classification algorithms (Bayesian, Decision Trees, and Neural Networks) for student performance. Their findings suggested that ensemble methods like Random Forest often provide superior accuracy due to their ability to handle the high variance found in educational datasets.
+4.  **Feature Importance:** Recent research has emphasized the role of continuous assessment. Studies have shown that performance in internal assignments (Assignment Scores) serves as a strong proxy for a student's diligence and understanding, acting as a lead indicator for final results.
+
+## 2.2 Existing System vs. Proposed System
+
+### 2.2.1 The Existing System
+In most current academic setups, the evaluation system is linear and retrospective.
+*   **Methodology:** Teachers manually record attendance and marks in registers or basic spreadsheets.
+*   **Feedback Loop:** Feedback is only provided after mid-term or final exams.
+*   **Analysis:** Subjective and prone to human error. There is no automated correlation between different performance metrics.
+*   **Intervention:** Interventions are often "too little, too late" as the semester is nearly over by the time patterns are identified.
+
+### 2.2.2 The Proposed System
+The proposed "Student Performance Classifier" introduces an intelligent layer between data collection and intervention.
+*   **Methodology:** Automated data processing using Machine Learning pipelines.
+*   **Feedback Loop:** Predictive and proactive. Results can be generated as soon as initial attendance and assignment data are available.
+*   **Analysis:** Objective and multi-dimensional. The Random Forest model considers the interplay between all variables simultaneously.
+*   **Intervention:** High-risk students are identified early (Mid-Term), allowing for targeted counseling or extra classes.
+
+## 2.3 Requirement Analysis
+
+### 2.3.1 Hardware Requirements
+To run and deploy this Machine Learning system effectively, the following hardware specifications are recommended:
+*   **Processor:** Intel Core i5 (8th Gen) or equivalent / higher for efficient model training.
+*   **RAM:** Minimum 8GB (to handle data manipulation and library overhead).
+*   **Storage:** 256GB SSD (for faster I/O operations).
+*   **Display:** Standard 1366x768 resolution for the Streamlit dashboard interface.
+
+### 2.3.2 Software Requirements
+The project is built using a modern Python-based tech stack:
+*   **Operating System:** Windows 10/11 or Linux.
+*   **Programming Language:** Python 3.9+
+*   **Libraries:** 
+    *   *Pandas:* For data manipulation and analysis.
+    *   *Scikit-Learn:* For implementing the Random Forest Classifier and preprocessing pipelines.
+    *   *Streamlit:* For building the web-based user interface.
+    *   *Pickle:* For model serialization and deployment.
+*   **IDE:** Visual Studio Code or PyCharm.
+
+## 2.4 Data Description
+The system relies on a curated dataset containing key performance indicators. The primary features are:
+
+1.  **Study Hours:** A continuous numeric variable representing the average weekly hours a student spends on self-study.
+2.  **Attendance:** A percentage-based variable (0-100) reflecting the student's presence in lectures.
+3.  **Internal Marks:** Scores obtained in periodic class tests (out of 100).
+4.  **Assignment Score:** A metric representing the quality and timeliness of submitted coursework (out of 100).
+5.  **Result (Target):** The categorical output label (Excellent, Good, Average, Poor).
+
+# CHAPTER 3: PROPOSED METHODOLOGY
+
+## 3.1 Data Flow Diagram (DFD)
+The methodology follows a structured Machine Learning pipeline:
+1.  **Data Acquisition:** Raw data is gathered from CSV files or manual entry.
+2.  **Preprocessing:** Handling missing values and scaling numeric data using `StandardScaler` to ensure zero mean and unit variance.
+3.  **Model Selection:** Utilizing a Random Forest Classifier. This ensemble method builds multiple decision trees and merges them to get a more accurate and stable prediction.
+4.  **Training:** The model is trained on 80% of the dataset using supervised learning.
+5.  **Evaluation:** The remaining 20% of the data is used to test the model's accuracy.
+6.  **Serialization:** The trained pipeline (Scaler + Model) is saved as a `.pkl` file for real-time inference.
+7.  **Deployment:** The serialized model is loaded into a Streamlit app to provide a GUI for the end-user.
